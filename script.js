@@ -6,15 +6,12 @@ const filterTodosElement = document.querySelector('#filter-todos'); // Selecting
 const taskBoxElement = document.querySelector('.task-box'); // Selecting the container (ul) that will display all the tasks
 console.log(addButton);
 
-
-// Clear the task box initially to ensure no tasks are displayed before loading
-taskBoxElement.innerHTML = '';
-
 // Variable to hold the current task text
 let task;
 
 // Load existing todos from localStorage, if available, or initialize an empty array
 let todos = JSON.parse(localStorage.getItem('todos')) || [];
+console.log('todos: ', todos);
 updateScreen(); // Display the tasks on the screen
 
 // Variable to hold the structure of the new task as an object
@@ -100,8 +97,9 @@ inputElement.addEventListener('keyup', function(e){
 // Function to filter todos based on the selected option (All, Pending, Completed)
 function applyFilter() {
     const filterValue = filterTodosElement.value; // Get the selected filter value
+    console.log({filterValue})
     const filteredTodos = []; // Initialize an empty array to hold filtered todos
-
+    
     // Use a for loop to iterate over the todos array
     for (let i = 0; i < todos.length; i++) {
         const todo = todos[i]; // Access the current todo
@@ -114,6 +112,7 @@ function applyFilter() {
         }
     }
 
+    console.log({filteredTodos})
     // Update the screen with the filtered todos or all todos if no filter is applied
     if (filterValue === 'all') {
         updateScreen(todos); // Show all tasks
@@ -155,6 +154,8 @@ function toggleTaskCompletion(index) {
 filterTodosElement.addEventListener('change', () => {
     applyFilter();
 });
+
+// filterTodosElement.addEventListener('change', applyFilter);
 
 // Function to edit an existing task
 function editTodo(index){
@@ -294,3 +295,26 @@ function updateScreen(tasksToDisplay = todos){
 //     {task: 'Buy Cat', isCompleted: false},
 // ];
 // console.log(myArray[3].task);
+
+// const doubleNum = (num = 4) => {
+//     console.log('doubling number');
+//     if(!true){
+//         return num
+//     }   
+//     console.log(num * 2);
+// }
+// let answer = doubleNum();
+// console.log({answer});
+// doubleNum();
+
+// let condition = {age: 19, country: "England"};
+
+// if(condition){
+//     console.log(`${condition} is a truthy value`);
+// }else{
+//     console.log(`${condition} is a falsy value`);
+// }
+
+// let age = 10;
+
+// (age >= 18) ? console.log('you can vote') : console.log('you cannot vote');
